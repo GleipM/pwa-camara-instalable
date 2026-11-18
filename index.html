@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inspección Visual PWA</title>
+
+  <!-- Instalabilidad -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- iOS / WebKit -->
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="InspecciónPWA">
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <h1>📷 Inspección Visual</h1>
+    <p class="autor">Maximiliano Torres Menez</p>
+
+    <!-- Android/Chrome: oculto hasta que se dispare beforeinstallprompt -->
+    <button id="btn-instalar" class="btn btn-install" hidden>⬇️ Instalar App</button>
+
+    <!-- iOS: oculto por defecto; se muestra si es iPhone y no está instalada -->
+    <div id="instrucciones-ios" class="aviso" hidden>
+      Para instalar en iPhone, pulsa el icono Compartir y selecciona 'Agregar a inicio'.
+    </div>
+
+    <!-- Paso 1: preparar cámara (aún NO se pide el permiso nativo) -->
+    <button id="btn-preparar-camara" class="btn btn-prep">📷 Solicitar Acceso a Cámara</button>
+
+    <!-- Tarjeta de Aviso Ético (Pre-Permiso), oculta por defecto -->
+    <section id="aviso-permiso" class="card" hidden>
+      <h2>Antes de continuar</h2>
+      <p>
+        Esta aplicación requiere acceso a tu cámara únicamente para mostrar una
+        vista previa local en pantalla. Ninguna imagen se envía a servidores externos.
+      </p>
+      <button id="btn-confirmar-permiso" class="btn">Aceptar y Encender Cámara</button>
+    </section>
+
+    <!-- Visor y controles -->
+    <section class="card">
+      <!-- playsinline evita el pantalla completa automático en iOS/Safari -->
+      <video id="visor-camara" autoplay playsinline muted></video>
+      <div class="fila">
+        <button id="btn-alternar-camara" class="btn">🔄 Cambiar cámara</button>
+        <button id="btn-apagar-camara" class="btn btn-sec">⏹ Apagar cámara</button>
+      </div>
+    </section>
+
+    <p id="mensaje-estado" class="estado" role="status">Cámara apagada.</p>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
